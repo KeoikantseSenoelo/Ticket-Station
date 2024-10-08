@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css"> <!--Include Font Awesome if needed -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ticket.css">
+
+    <title>Payment Details</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg custom-navbar">
+                <a class="navbar-brand" href="index.html">TICKET STATION</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Account
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="login.html">Login</a>
+                                <a class="dropdown-item" href="register.html">Register</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="ticket.html">Buy Tickets</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Payment Details</h2>
+            <form id="paymentForm" action="confirmation.html" method="post" onsubmit="return validatePayment()">
+                <div class="form-group">
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardExpiry">Expiry Date:</label>
+                    <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardCVC">CVC:</label>
+                    <input type="text" id="cardCVC" name="cardCVC" class="form-control" required>
+                </div>
+
+                <a href="purchase_confirmation.html" class="btn btn-success" role="button">Complete Purchase</a>
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2024 TICKET STATION</p>
+    </footer>
+
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        function validatePayment() {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const cardExpiry = document.getElementById('cardExpiry').value;
+            const cardCVC = document.getElementById('cardCVC').value;
+
+            // Simple validation
+            if (cardNumber.length < 16 || isNaN(cardNumber)) {
+                alert("Please enter a valid card number.");
+                return false;
+            }
+
+            if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
+                alert("Please enter a valid expiry date in MM/YY format.");
+                return false;
+            }
+
+            if (cardCVC.length < 3 || isNaN(cardCVC)) {
+                alert("Please enter a valid CVC.");
+                return false;
+            }
+
+            // Proceed to the confirmation page
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+
+</html>
